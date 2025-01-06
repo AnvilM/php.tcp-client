@@ -41,7 +41,7 @@ final class Connection
     /**
      * @throws ConnectionException
      */
-    public function send(string $data, int $timeout = 5, int $length = null): self
+    public function send(string $data, ?int $timeout = null, int $length = null): self
     {
         if($this->socket->isClosed()){
             throw new ConnectionException("Send data before opening socket");
@@ -58,7 +58,7 @@ final class Connection
     /**
      * @throws ConnectionException
      */
-    public function sendRequest(string $data, int $readLength, int $timeout = 5, int $writeLength = null, int $readMode = PHP_BINARY_READ): string
+    public function sendRequest(string $data, int $readLength, ?int $timeout = null, int $writeLength = null, int $readMode = PHP_BINARY_READ): string
     {
         try {
             $this->send($data, $timeout, $writeLength);
@@ -71,7 +71,7 @@ final class Connection
     /**
      * @throws ConnectionException
      */
-    public function readBinary(int $length, int $timeout = 5): string
+    public function readBinary(int $length, ?int $timeout = null): string
     {
         try {
             return $this->socket->read($length, $timeout);
@@ -83,7 +83,7 @@ final class Connection
     /**
      * @throws ConnectionException
      */
-    public function readString(int $length, int $timeout = 5): string
+    public function readString(int $length, ?int $timeout = null): string
     {
         try {
             return $this->socket->read($length, $timeout, PHP_NORMAL_READ);
