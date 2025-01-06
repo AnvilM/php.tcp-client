@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Anvil\TCPClient\Core\Socket;
 
-final class SocketException extends \Exception
+class SocketException extends \Exception
 {
 
 }
