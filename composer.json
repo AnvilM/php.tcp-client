@@ -1,5 +1,5 @@
 {
-    "name": "anvilm/tcp",
+    "name": "anvilm/tcp.client",
     "license": "MIT",
     "autoload": {
         "psr-4": {
