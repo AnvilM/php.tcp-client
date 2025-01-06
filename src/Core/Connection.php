@@ -99,6 +99,7 @@ final class Connection
     {
         try {
             $this->socket->close();
+            $this->socket = new Socket($this->socket->getHost(), $this->socket->getPort());
         } catch (SocketException $e) {
             throw new ConnectionException($e->getMessage());
         }
