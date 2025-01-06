@@ -50,13 +50,13 @@ final class Socket
     /**
      * @throws SocketException
      */
-    public function open(int $timeout = 5)
+    public function open(?int $timeout = null)
     {
         if(!$this->isClosed()){
             throw new SocketException("Socket already opened");
         }
 
-        $this->timeout->setTimeout($timeout);
+        $this->timeout->setTimeout($timeout ?? $this->timeout->getTimeout());
         if(!socket_connect($this->socket, $this->host, $this->port)){
             $this->close();
             throw new SocketException(socket_strerror(socket_last_error($this->socket)));
@@ -81,7 +81,7 @@ final class Socket
     /**
      * @throws SocketException
      */
-    public function write(string $data, int $timeout = 5, int $length = null)
+    public function write(string $data, ?int $timeout = null, int $length = null)
     {
         if($this->isClosed()){
             throw new SocketException("Socket is closed");
@@ -91,7 +91,7 @@ final class Socket
             $length = strlen($data);
         }
 
-        $this->timeout->setTimeout($timeout);
+        $this->timeout->setTimeout($timeout ?? $this->timeout->getTimeout());
         if(socket_write($this->socket, $data, $length) === FALSE){
             $this->close();
             throw new SocketException(socket_strerror(socket_last_error($this->socket)));
@@ -102,13 +102,13 @@ final class Socket
     /**
      * @throws SocketException
      */
-    public function read(int $length, int $timeout = 5, int $mode = PHP_BINARY_READ): string
+    public function read(int $length, ?int $timeout = null, int $mode = PHP_BINARY_READ): string
     {
         if($this->isClosed()){
             throw new SocketException("Socket is closed");
         }
 
-        $this->timeout->setTimeout($timeout);
+        $this->timeout->setTimeout($timeout ?? $this->timeout->getTimeout());
         $data = socket_read($this->socket, $length, $mode);
         if($data === FALSE){
             $this->close();
