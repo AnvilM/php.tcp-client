@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Anvil\TCPClient\Core\Socket;
+namespace Anvil\TCPClient\Connection\Socket;
 
 class SocketException extends \Exception
 {

@@ -1,5 +1,5 @@
 {
-    "name": "anvilm/php.tcp-client",
+    "name": "anvilm/php.transport",
     "license": "MIT",
     "autoload": {
         "psr-4": {
