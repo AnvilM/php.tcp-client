@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Anvil\TCPClient\Connection;
+namespace AnvilM\Transport\Connection;
 
 
-use Anvil\TCPClient\Connection\Context\UDPContext;
+use AnvilM\Transport\Connection\Context\UDPContext;
 
 /**
  * @property UDPContext $context

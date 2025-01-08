@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Anvil\TCPClient\Connection;
+namespace AnvilM\Transport\Connection;
 
-use Anvil\TCPClient\Connection\Socket\SocketException;
+use AnvilM\Transport\Connection\Socket\SocketException;
 
 final class ConnectionException extends SocketException
 {

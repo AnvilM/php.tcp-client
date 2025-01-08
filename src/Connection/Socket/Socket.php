@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Anvil\TCPClient\Connection\Socket;
+namespace AnvilM\Transport\Connection\Socket;
 
-use Anvil\TCPClient\Connection\Context\Context;
-use Anvil\TCPClient\Connection\Socket\Options\Timeout;
+use AnvilM\Transport\Connection\Context\Context;
+use AnvilM\Transport\Connection\Socket\Options\Timeout;
 
 final class Socket
 {
@@ -24,27 +24,19 @@ final class Socket
     /** @var bool  */
     private $closed = true;
 
-    /**
-     * @throws SocketException
-     */
     public function __construct(string $host, Context $context)
     {
         $this->host = $host;
         $this->context = $context;
 
-        try {
-            $this->timeout = new Timeout($this->context);
-        } catch (SocketException $e){
-            throw new SocketException("Error while creating socket");
-        }
-
+        $this->timeout = new Timeout($this->context);
 
     }
 
     /**
      * @throws SocketException
      */
-    public function open(?int $timeout = null): self
+    public function open(?float $timeout = null): self
     {
         if(!$this->isClosed()){
             throw new SocketException("Socket already opened");
@@ -78,7 +70,7 @@ final class Socket
     /**
      * @throws SocketException
      */
-    public function write(string $data, int $timeout = 30, int $length = null): self
+    public function write(string $data, float $timeout = 30, int $length = null): self
     {
         if($this->isClosed()){
             throw new SocketException("Socket is closed");
@@ -97,7 +89,7 @@ final class Socket
     /**
      * @throws SocketException
      */
-    public function read(int $length = 1024, int $timeout = 30): string
+    public function read(int $length = 1024, float $timeout = 30): string
     {
         if($this->isClosed()){
             throw new SocketException("Socket is closed");

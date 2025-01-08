@@ -2,28 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Anvil\TCPClient\Connection\Socket\Options;
+namespace AnvilM\Transport\Connection\Socket\Options;
 
-use Anvil\TCPClient\Connection\Context\Context;
-use Anvil\TCPClient\Connection\Socket\SocketException;
+use AnvilM\Transport\Connection\Context\Context;
+use AnvilM\Transport\Connection\Socket\SocketException;
 
 final class Timeout
 {
     /** @var Context */
     private $context;
 
-    /** @var int  */
+    /** @var float  */
     private $timeout = 30;
 
-    /** @var int  */
+    /** @var float  */
     private $oldTimeout = 30;
 
-    /**
-     * @throws SocketException
-     */
     public function __construct(Context $context) {
         $this->context = $context;
-        $this->setTimeout($this->timeout);
     }
 
     public function getTimeout(): int
@@ -34,8 +30,9 @@ final class Timeout
     /**
      * @throws SocketException
      */
-    public function setTimeout(int $timeout)
+    public function setTimeout(float $timeout)
     {
+        echo $timeout;
         if(stream_context_set_option($this->context->getContext(), $this->context->getWrapper(), 'timeout', $timeout) === false){
             throw new SocketException("Error while setting timeout");
         }
@@ -43,9 +40,12 @@ final class Timeout
         $this->timeout = $timeout;
     }
 
+    /**
+     * @throws SocketException
+     */
     public function resetTimeout(): void
     {
-        $this->timeout = $this->oldTimeout;
+        $this->setTimeout($this->oldTimeout);
     }
 
 
