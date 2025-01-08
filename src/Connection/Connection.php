@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Anvil\TCPClient\Connection;
+namespace AnvilM\Transport\Connection;
 
-use Anvil\TCPClient\Connection\Context\Context;
-use Anvil\TCPClient\Connection\Socket\Socket;
-use Anvil\TCPClient\Connection\Socket\SocketException;
+use AnvilM\Transport\Connection\Context\Context;
+use AnvilM\Transport\Connection\Socket\Socket;
+use AnvilM\Transport\Connection\Socket\SocketException;
 
 abstract class Connection
 {
@@ -36,10 +36,10 @@ abstract class Connection
     /**
      * @throws ConnectionException
      */
-    public function open(): self
+    public function open(?float $timeout = null): self
     {
         try {
-            $this->socket->open();
+            $this->socket->open($timeout);
         } catch (SocketException $e) {
             throw new ConnectionException($e->getMessage());
         }
@@ -71,7 +71,7 @@ abstract class Connection
     /**
      * @throws ConnectionException
      */
-    public function read(int $length = 1024, int $timeout = 30): string
+    public function read(int $length = 1024, float $timeout = 30): string
     {
         try {
             return $this->socket->read($length, $timeout);
@@ -83,7 +83,7 @@ abstract class Connection
     /**
      * @throws ConnectionException
      */
-    public function write(string $data, int $timeout = 30, int $length = null): self
+    public function write(string $data, float $timeout = 30, int $length = null): self
     {
         try {
             $this->socket->write($data, $timeout, $length);

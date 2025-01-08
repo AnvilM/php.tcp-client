@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Anvil\TCPClient\Connection;
+namespace AnvilM\Transport\Connection;
 
-use Anvil\TCPClient\Connection\Context\TCPContext;
+use AnvilM\Transport\Connection\Context\TCPContext;
 
 /**
  * @property TCPContext $context

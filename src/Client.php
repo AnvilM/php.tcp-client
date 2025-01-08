@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Anvil\TCPClient;
+namespace AnvilM\Transport;
 
-use Anvil\TCPClient\Connection\ConnectionException;
-use Anvil\TCPClient\Connection\Context\TCPContext;
-use Anvil\TCPClient\Connection\Context\TLSContext;
-use Anvil\TCPClient\Connection\Context\UDPContext;
-use Anvil\TCPClient\Connection\TCPConnection;
-use Anvil\TCPClient\Connection\TLSConnection;
-use Anvil\TCPClient\Connection\UDPConnection;
+use AnvilM\Transport\Connection\ConnectionException;
+use AnvilM\Transport\Connection\Context\TCPContext;
+use AnvilM\Transport\Connection\Context\TLSContext;
+use AnvilM\Transport\Connection\Context\UDPContext;
+use AnvilM\Transport\Connection\TCPConnection;
+use AnvilM\Transport\Connection\TLSConnection;
+use AnvilM\Transport\Connection\UDPConnection;
 
 final class Client
 {
